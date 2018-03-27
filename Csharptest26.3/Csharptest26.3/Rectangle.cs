@@ -20,7 +20,7 @@ namespace Csharptest26._3
             name = "Rectangle";
             _width = a;
             _height = b;
-            Random_setColor();
+            Random_setColor();            
             GetArea();
             
         }

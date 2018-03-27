@@ -10,17 +10,17 @@ namespace Csharptest26._3
     {
         static void Main(string[] args)
         {
-            Rectangle a = new Rectangle(22,32);
-            Rectangle b = new Rectangle(32,22);
-            Rectangle c = new Rectangle(56,41);
-            Rectangle d = new Rectangle(53,43);
-            Rectangle e = new Rectangle(21,43);
-            Rectangle f = new Rectangle(21,45);
-            Console.WriteLine($"\nAre rectangles {a} = {f}= {a.Equals(f)} \n");
+            Rectangle a1 = new Rectangle(22,32);
+            Rectangle b2 = new Rectangle(32,22);
+            Rectangle c3 = new Rectangle(56,41);
+            Rectangle d4 = new Rectangle(53,43);
+            Rectangle e5 = new Rectangle(21,43);
+            Rectangle f6 = new Rectangle(21,45);
+            Console.WriteLine($"\nAre rectangles {a1} = {f6}= {a1.Equals(f6)} \n");
            
 
             List<Rectangle> Rectangle_list = new List<Rectangle>();            
-            Rectangle_list.Add(a); Rectangle_list.Add(b); Rectangle_list.Add(c); Rectangle_list.Add(d); Rectangle_list.Add(e); Rectangle_list.Add(f);
+            Rectangle_list.Add(a1); Rectangle_list.Add(b2); Rectangle_list.Add(c3); Rectangle_list.Add(d4); Rectangle_list.Add(e5); Rectangle_list.Add(f6);
             Console.WriteLine("Now we print the Rectangles of the list \n");
             foreach (Rectangle element in Rectangle_list)
             {
@@ -35,16 +35,16 @@ namespace Csharptest26._3
                 //Console.WriteLine(element.GetInfo() +$" with area = {element.area}");
             }
 
-            Square a1 = new Square(22);
-            Square a12 = new Square(67);
-            Square a13 = new Square(52);
-            Square a14 = new Square(50);
-            Square a15 = new Square(96);
-            Square a16 = new Square(12);
-            Square a17 = new Square(45);
-            Console.WriteLine($"\nAre Squares {a1} = {a14}= {a1.Equals(a14)} \n ");
+            Square a12 = new Square(22);
+            Square a123 = new Square(67);
+            Square a134 = new Square(52);
+            Square a145 = new Square(50);
+            Square a156 = new Square(96);
+            Square a167 = new Square(12);
+            Square a178 = new Square(45);
+            Console.WriteLine($"\nAre Squares {a12} = {a145}= {a12.Equals(a145)} \n ");
 
-            List<Square> Square_List = new List<Square> { a1, a12, a13, a14, a15, a16 };
+            List<Square> Square_List = new List<Square> { a12, a123, a134, a145, a156, a167 };
             Console.WriteLine("Now we print the Squares of the List \n");
             foreach (Square element in Square_List)
             {
@@ -60,6 +60,9 @@ namespace Csharptest26._3
                 //Console.WriteLine(element.GetInfo() +$" with area = {element.area}");
             }
 
+            Square sq = new Square(42);
+            Console.WriteLine(sq);
+           
 
 
             Console.ReadKey();
