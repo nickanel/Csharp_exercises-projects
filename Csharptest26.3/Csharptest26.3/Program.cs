@@ -10,6 +10,7 @@ namespace Csharptest26._3
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
