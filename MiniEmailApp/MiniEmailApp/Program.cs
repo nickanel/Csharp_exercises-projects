@@ -30,9 +30,7 @@ namespace MiniEmailApp
                                 bool correct_username, correct_password;
                                 do
                                 {
-                                    loggedin_user.Username = menu_manager.LoginMenuUsername();
-                                    Console.WriteLine("I entered this do while loop till now");
-                                    System.Threading.Thread.Sleep(1000);
+                                    loggedin_user.Username = menu_manager.LoginMenuUsername();                                    
                                     correct_username = user_manager.UsernameExistsinDatabase(loggedin_user.Username);
 
                                 } while (!correct_username);
