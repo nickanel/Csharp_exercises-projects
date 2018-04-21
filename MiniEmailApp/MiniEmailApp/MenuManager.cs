@@ -107,8 +107,8 @@ namespace MiniEmailApp
         {
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
-            Console.WriteLine($"User{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}has logged in logged in successfully");
-            System.Threading.Thread.Sleep(200);
+            Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}has logged in logged in successfully");
+            System.Threading.Thread.Sleep(1300);
         }
         
         #endregion
