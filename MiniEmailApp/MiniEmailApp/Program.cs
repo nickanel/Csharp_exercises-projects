@@ -90,6 +90,8 @@ namespace MiniEmailApp
                         case MainMenuOption.ForgotPassword:
                             break;
                         case MainMenuOption.Exit:
+                            Console.WriteLine(@"");
+                            System.Threading.Thread.Sleep(3000);
                             Environment.Exit(0);
                             break;
                     }
