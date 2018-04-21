@@ -68,8 +68,15 @@ namespace MiniEmailApp
             }
             public User()
             {
+            Userid = 0;
+            Firstname = "";
+            Lastname = "";
+            Username = "";
+            Password = "";
+            Usertype = UserType.User;
+            Creationtime = DateTime.Now;
 
-            }
+        }
             #endregion
 
         }

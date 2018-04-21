@@ -25,7 +25,11 @@ namespace MiniEmailApp
             }
         }
 
-        private UserManager() { }
+        private UserManager()
+        {
+            currentUser = new User();
+        }
+        
 
 
 
