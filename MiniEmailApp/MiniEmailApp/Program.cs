@@ -57,12 +57,9 @@ namespace MiniEmailApp
                                 //One by one insertion +check  of first name lastname username and password 
                                 do
                                 {
-                                    tempuser.Firstname = menu_manager.RegisterMenuEnterFirstname();
-                                    Console.WriteLine($"{tempuser.Firstname} was given");
-                                    System.Threading.Thread.Sleep(1000);
+                                    tempuser.Firstname = menu_manager.RegisterMenuEnterFirstname();                                   
                                     correct_firstname = user_manager.ValidateRegisteringFirstname(tempuser.Firstname);
-                                    Console.WriteLine($"The name was {correct_firstname}");
-                                    System.Threading.Thread.Sleep(1000);
+                                    
                                 } while (!correct_firstname);
                                 do
                                 {
