@@ -202,10 +202,11 @@ namespace MiniEmailApp
 
                                 successfull_register = user_manager.RegisterUserinDatabase(tempuser.Firstname, tempuser.Lastname, tempuser.Username, tempuser.Password);
                                 user_manager.Logout();
+                                tempuser = user_manager.GetCurrentUser();
 
                             } while (!successfull_register);//repeat till the whole process returns a true value of the successfull register flag
                             menu_manager.SuccessfullRegister(tempuser.Username);
-                            tempuser = null;
+                            
 
                             break;
                         case MainMenuOption.ForgotPassword:

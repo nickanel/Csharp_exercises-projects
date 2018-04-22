@@ -326,7 +326,7 @@ namespace MiniEmailApp
 
         public void Logout()
         {
-            currentUser = null;
+            currentUser = new User();
         }
 
         //    do {
