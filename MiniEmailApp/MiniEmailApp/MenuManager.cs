@@ -110,9 +110,33 @@ namespace MiniEmailApp
             Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}has logged in logged in successfully");
             System.Threading.Thread.Sleep(2000);
         }
-
+        public UserLoginMenuOption User_LoggedInMenu()
+        {
+            Aux.AuxiliaryFunction.PrintProgrammHeader();
+            do
+            {
+                Console.WriteLine("**Options **");
+                // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info","5.Log out" };
+                int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
+                switch (option)
+                {
+                    case 0:
+                        return UserLoginMenuOption.ReadMessageBox;
+                    case 1:
+                        return UserLoginMenuOption.SentMessage;
+                    case 2:
+                        return UserLoginMenuOption.EnterChatroom;
+                    case 3:
+                        return UserLoginMenuOption.ChangePersonalInfo;
+                    case 4 :
+                        Console.Beep();
+                        return UserLoginMenuOption.Logout;
+                }
+            } while (true);
+        }
         //public void 
-        
+
         #endregion
     }
 }

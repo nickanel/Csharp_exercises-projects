@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace MiniEmailApp.Enums
 {
-    class GodLoginMenuOption
-    {
-        enum SuperAdmiLoginMenuOption
+  
+        public enum GodLoginMenuOption
         {
             ReadMessageBox = 1,
             SentMessage,
@@ -23,5 +22,5 @@ namespace MiniEmailApp.Enums
             DepositmillinDollars,
             Logout
         }
-    }
+   
 }

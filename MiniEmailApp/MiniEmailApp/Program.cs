@@ -48,10 +48,11 @@ namespace MiniEmailApp
                             switch (loggedin_user.Usertype)
                             {
                                 case UserType.User:
-                                    do
-                                    {
+                                    UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
+                                    //do
+                                    //{
 
-                                    }while()
+                                    //}while()
                                     break;
                                 case UserType.Admin:
                                     break;

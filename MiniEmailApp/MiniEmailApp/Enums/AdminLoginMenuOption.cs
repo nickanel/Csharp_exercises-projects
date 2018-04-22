@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MiniEmailApp.Enums
 {
-    enum AdminLoginMenuOption
+   public enum AdminLoginMenuOption
     {
         ReadMessageBox=1,
         SentMessage,

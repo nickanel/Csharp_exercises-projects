@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MiniEmailApp
 {
-    enum UserLoginMenuOption
-    {
-        ReadMessageBox=1,
-        SentMessage,
-        EnterChatroom,
-        ChangePersonalInfo,
-        Logout
-    }
+     public enum UserLoginMenuOption
+        {
+            ReadMessageBox=1,
+            SentMessage,
+            EnterChatroom,
+            ChangePersonalInfo,
+            Logout
+        }
 }
