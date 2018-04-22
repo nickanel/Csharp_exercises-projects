@@ -40,7 +40,7 @@ namespace MiniEmailApp
                                     correct_password = user_manager.IsPasswordCorrect(loggedin_user.Username, loggedin_user.Password);
 
                                 } while (!correct_password);
-                                successfull_login = user_manager.Login(loggedin_user.Username, loggedin_user.Password);
+                                successfull_login = user_manager.Login(loggedin_user.Username, loggedin_user.Password);//pairnei ola ta stoixeia o current user otan ginetai i epikoinwnia me ti basi
                                 menu_manager.LoginWasSuccessfull(loggedin_user = user_manager.GetCurrentUser());
 
                             } while (!successfull_login);

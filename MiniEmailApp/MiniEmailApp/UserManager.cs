@@ -291,9 +291,9 @@ namespace MiniEmailApp
                                     int usertype = (int)reader["UserType"];
                                     int userid = (int)reader["UserId"];
                                     string firstname = reader["FirstName"].ToString();
-                                    string lastname = reader["FirstName"].ToString();
-                                    string username_ = reader["FirstName"].ToString();
-                                    string password_ = reader["FirstName"].ToString();
+                                    string lastname = reader["LastName"].ToString();
+                                    string username_ = reader["UserName"].ToString();
+                                    string password_ = reader["Password"].ToString();
                                     DateTime creationdate = (DateTime)reader["CreationDate"];
                                     currentUser = new User(userid,firstname,lastname,username_,password_,(UserType)usertype,creationdate);
                                     successful_login = true;
