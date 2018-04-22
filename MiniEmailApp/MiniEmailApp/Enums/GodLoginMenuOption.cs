@@ -17,7 +17,7 @@ namespace MiniEmailApp
             DeleteUserMailbox,
             ResetUserPassword,
             DeleteUser,
-            DeletAllDatabase,
+            DeleteAllDatabase,
             GrantSuperAdminPriveleges,
             DepositmillinDollars,
             Logout
