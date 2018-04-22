@@ -46,6 +46,8 @@
     <Compile Include="ChatroomManager.cs" />
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Enums\AdminLoginMenuOption.cs" />
+    <Compile Include="Enums\GodLoginMenuOption.cs" />
+    <Compile Include="Enums\SuperAdmiLoginMenuOption.cs" />
     <Compile Include="Enums\UserLoginMenuOption.cs" />
     <Compile Include="MainMenuOption.cs" />
     <Compile Include="MessageManager.cs" />
