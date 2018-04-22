@@ -115,7 +115,7 @@ namespace MiniEmailApp
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             do
             {
-                Console.WriteLine("**Options **");
+                Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
                 string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info","5.Log out" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
@@ -130,8 +130,39 @@ namespace MiniEmailApp
                     case 3:
                         return UserLoginMenuOption.ChangePersonalInfo;
                     case 4 :
-                        Console.Beep();
+                        Console.Beep();                        
                         return UserLoginMenuOption.Logout;
+                }
+            } while (true);
+        }
+        public AdminLoginMenuOption Admin_LoggedInMenu()
+        {
+            Aux.AuxiliaryFunction.PrintProgrammHeader();
+            do
+            {
+                Console.WriteLine("****");
+                // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox","6.Delete User's Mailbox,","7.ResetUserPassword" ,"8.Logout"};
+                int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
+                switch (option)
+                {
+                    case 0:
+                        return AdminLoginMenuOption.ReadMessageBox;
+                    case 1:
+                        return AdminLoginMenuOption.SentMessage;
+                    case 2:
+                        return AdminLoginMenuOption.EnterChatroom;
+                    case 3:
+                        return AdminLoginMenuOption.ChangePersonalInfo;
+                    case 4:
+                        return AdminLoginMenuOption.SelectUsertoViewhisChatHistory;
+                    case 5:
+                        return AdminLoginMenuOption.DeleteUserMailbox;
+                    case 6:
+                        return AdminLoginMenuOption.ResetUserPassword;
+                    case 7:
+                        Console.Beep();
+                        return AdminLoginMenuOption.Logout; ;
                 }
             } while (true);
         }

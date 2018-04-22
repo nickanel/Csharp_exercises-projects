@@ -51,7 +51,7 @@ namespace MiniEmailApp.Aux
                     // You could easily change it to simply change the color of the text.
                     if (choice == c)
                     {
-                        Console.Write(">>");
+                        Console.Write(">> ");
                         Console.WriteLine(menuItems[c]);
                     }
                     // Just write the current option out if the current item is not our variable c.

@@ -48,13 +48,56 @@ namespace MiniEmailApp
                             switch (loggedin_user.Usertype)
                             {
                                 case UserType.User:
-                                    UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
-                                    //do
-                                    //{
+                                    {
 
-                                    //}while()
+                                        UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
+                                        do
+                                        {
+                                            switch (userLoginMenuOption)
+                                            {
+                                                case UserLoginMenuOption.ReadMessageBox:
+                                                    break;
+                                                case UserLoginMenuOption.SentMessage:
+                                                    break;
+                                                case UserLoginMenuOption.EnterChatroom:
+                                                    break;
+                                                case UserLoginMenuOption.ChangePersonalInfo:
+                                                    break;
+                                                case UserLoginMenuOption.Logout:
+                                                    break;
+                                            }
+                                        } while (userLoginMenuOption != UserLoginMenuOption.Logout) ;                                        
+                                    }
+
                                     break;
-                                case UserType.Admin:
+                                             
+                               case UserType.Admin:
+                                    {
+                                        AdminLoginMenuOption adminLoginMenuOption = menu_manager.Admin_LoggedInMenu();
+                                        do
+                                        {
+                                            switch (adminLoginMenuOption)
+                                            {
+                                                case AdminLoginMenuOption.ReadMessageBox:
+                                                    break;
+                                                case AdminLoginMenuOption.SentMessage:
+                                                    break;
+                                                case AdminLoginMenuOption.EnterChatroom:
+                                                    break;
+                                                case AdminLoginMenuOption.ChangePersonalInfo:
+                                                    break;
+                                                case AdminLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                    break;
+                                                case AdminLoginMenuOption.DeleteUserMailbox:
+                                                    break;
+                                                case AdminLoginMenuOption.ResetUserPassword:
+                                                    break;
+                                                case AdminLoginMenuOption.Logout:
+                                                    break;
+                                            }
+                                            
+                                        } while (adminLoginMenuOption != AdminLoginMenuOption.Logout);
+                                    }
                                     break;
                                 case UserType.SuperAdmin:
                                     break;
