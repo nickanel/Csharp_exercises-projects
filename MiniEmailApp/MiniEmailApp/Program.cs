@@ -23,14 +23,14 @@ namespace MiniEmailApp
                         case MainMenuOption.Login:
                             bool successfull_login;
                             User loggedin_user = user_manager.GetCurrentUser();
-                            
+
                             //create a loggedin user in order to user his properties in the next menu after successfull login
                             do
                             {
                                 bool correct_username, correct_password;
                                 do
                                 {
-                                    loggedin_user.Username = menu_manager.LoginMenuUsername();                                    
+                                    loggedin_user.Username = menu_manager.LoginMenuUsername();
                                     correct_username = user_manager.UsernameExistsinDatabase(loggedin_user.Username);
 
                                 } while (!correct_username);
@@ -41,7 +41,7 @@ namespace MiniEmailApp
 
                                 } while (!correct_password);
                                 successfull_login = user_manager.Login(loggedin_user.Username, loggedin_user.Password);
-                                menu_manager.LoginWasSuccessfull(loggedin_user=user_manager.GetCurrentUser());                                
+                                menu_manager.LoginWasSuccessfull(loggedin_user = user_manager.GetCurrentUser());
 
                             } while (!successfull_login);
 
@@ -66,12 +66,12 @@ namespace MiniEmailApp
                                                 case UserLoginMenuOption.Logout:
                                                     break;
                                             }
-                                        } while (userLoginMenuOption != UserLoginMenuOption.Logout) ;                                        
+                                        } while (userLoginMenuOption != UserLoginMenuOption.Logout);
                                     }
-
+                                    user_manager.Logout();
                                     break;
-                                             
-                               case UserType.Admin:
+
+                                case UserType.Admin:
                                     {
                                         AdminLoginMenuOption adminLoginMenuOption = menu_manager.Admin_LoggedInMenu();
                                         do
@@ -95,16 +95,78 @@ namespace MiniEmailApp
                                                 case AdminLoginMenuOption.Logout:
                                                     break;
                                             }
-                                            
+
                                         } while (adminLoginMenuOption != AdminLoginMenuOption.Logout);
                                     }
+                                    user_manager.Logout();
                                     break;
                                 case UserType.SuperAdmin:
+                                    {
+                                        SuperAdmiLoginMenuOption superAdmiLoginMenuOption = menu_manager.SuperAdmin_LoggedInMenu();
+                                        do
+                                        {
+                                            switch (superAdmiLoginMenuOption)
+                                            {
+                                                case SuperAdmiLoginMenuOption.ReadMessageBox:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.SentMessage:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.EnterChatroom:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.ChangePersonalInfo:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.DeleteUserMailbox:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.ResetUserPassword:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.DeleteUser:
+                                                    break;
+                                                case SuperAdmiLoginMenuOption.Logout:
+                                                    break;
+                                            }
+                                        } while (superAdmiLoginMenuOption != SuperAdmiLoginMenuOption.Logout);
+                                    }
+                                    user_manager.Logout();
                                     break;
                                 case UserType.God:
+                                    GodLoginMenuOption godLoginMenuOption = menu_manager.God_LoggedInMenu();
+                                    do
+                                    {
+                                        switch (godLoginMenuOption)
+                                        {
+                                            case GodLoginMenuOption.ReadMessageBox:
+                                                break;
+                                            case GodLoginMenuOption.SentMessage:
+                                                break;
+                                            case GodLoginMenuOption.EnterChatroom:
+                                                break;
+                                            case GodLoginMenuOption.ChangePersonalInfo:
+                                                break;
+                                            case GodLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                break;
+                                            case GodLoginMenuOption.DeleteUserMailbox:
+                                                break;
+                                            case GodLoginMenuOption.ResetUserPassword:
+                                                break;
+                                            case GodLoginMenuOption.DeleteUser:
+                                                break;
+                                            case GodLoginMenuOption.DeleteAllDatabase:
+                                                break;
+                                            case GodLoginMenuOption.GrantSuperAdminPriveleges:
+                                                break;
+                                            case GodLoginMenuOption.DepositmillinDollars:
+                                                break;
+                                            case GodLoginMenuOption.Logout:
+                                                break;
+                                        }
+                                    } while (godLoginMenuOption != GodLoginMenuOption.Logout);
+                                    user_manager.Logout();
                                     break;
                             }
                             break;
+
 
                         case MainMenuOption.Register:
 
@@ -116,9 +178,9 @@ namespace MiniEmailApp
                                 //One by one insertion +check  of first name lastname username and password 
                                 do
                                 {
-                                    tempuser.Firstname = menu_manager.RegisterMenuEnterFirstname();                                   
+                                    tempuser.Firstname = menu_manager.RegisterMenuEnterFirstname();
                                     correct_firstname = user_manager.ValidateRegisteringFirstname(tempuser.Firstname);
-                                    
+
                                 } while (!correct_firstname);
                                 do
                                 {
@@ -156,14 +218,14 @@ namespace MiniEmailApp
                     }
 
                 }
+
+
                 catch (SystemException e)
                 {
 
                 }
 
             } while (true);
-
         }
-
     }
 }

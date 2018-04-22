@@ -107,7 +107,7 @@ namespace MiniEmailApp
         {
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
-            Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}has logged in logged in successfully");
+            Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}  has logged in  successfully");
             System.Threading.Thread.Sleep(2000);
         }
         public UserLoginMenuOption User_LoggedInMenu()
