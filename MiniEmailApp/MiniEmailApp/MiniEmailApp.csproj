@@ -45,6 +45,7 @@
     <Compile Include="Auxiliary Functions\Auxiliary.cs" />
     <Compile Include="ChatroomManager.cs" />
     <Compile Include="DatabaseManager.cs" />
+    <Compile Include="LoginMenuOption.cs" />
     <Compile Include="MainMenuOption.cs" />
     <Compile Include="MessageManager.cs" />
     <Compile Include="UserManager.cs" />

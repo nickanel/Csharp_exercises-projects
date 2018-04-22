@@ -41,10 +41,25 @@ namespace MiniEmailApp
 
                                 } while (!correct_password);
                                 successfull_login = user_manager.Login(loggedin_user.Username, loggedin_user.Password);
-                                menu_manager.SuccessfulLogin(user_manager.GetCurrentUser());
+                                menu_manager.LoginWasSuccessfull(loggedin_user=user_manager.GetCurrentUser());                                
 
                             } while (!successfull_login);
 
+                            switch (loggedin_user.Usertype)
+                            {
+                                case UserType.User:
+                                    do
+                                    {
+
+                                    }while()
+                                    break;
+                                case UserType.Admin:
+                                    break;
+                                case UserType.SuperAdmin:
+                                    break;
+                                case UserType.God:
+                                    break;
+                            }
                             break;
 
                         case MainMenuOption.Register:
@@ -97,7 +112,7 @@ namespace MiniEmailApp
                     }
 
                 }
-                catch(SystemException e)
+                catch (SystemException e)
                 {
 
                 }
@@ -105,6 +120,6 @@ namespace MiniEmailApp
             } while (true);
 
         }
-    
+
     }
 }

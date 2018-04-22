@@ -103,13 +103,15 @@ namespace MiniEmailApp
             string password = Console.ReadLine();
             return password;
         }
-        public void SuccessfulLogin(User user)
+        public void LoginWasSuccessfull(User user)
         {
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}has logged in logged in successfully");
             System.Threading.Thread.Sleep(2000);
         }
+
+        //public void 
         
         #endregion
     }
