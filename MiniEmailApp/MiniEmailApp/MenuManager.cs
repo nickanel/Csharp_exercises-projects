@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace MiniEmailApp
 {
-    public  class MenuManager
+    public class MenuManager
     {
-        public  MainMenuOption Initial_Menu()
-        {           
+        public MainMenuOption Initial_Menu()
+        {
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             do
             {
                 Console.WriteLine("**Main Menu**");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems= { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
+                string[] menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -45,20 +46,20 @@ namespace MiniEmailApp
             password = Console.ReadLine();
         }
         #region REGISTER   
-        public string  RegisterMenuEnterFirstname()
+        public string RegisterMenuEnterFirstname()
         {
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             Console.WriteLine("Please enter your Firstname (5-20 characters)");
-            string firstname = Console.ReadLine() ;
-            return firstname  ;
+            string firstname = Console.ReadLine();
+            return firstname;
         }
         public string RegisterMenuEnterLastname()
         {
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             Console.WriteLine("Please enter your Lastname(5-20 characters)");
-            string lastname = Console.ReadLine(); 
+            string lastname = Console.ReadLine();
             return lastname;
         }
         public string RegisterMenuEnterUsername()
@@ -66,7 +67,7 @@ namespace MiniEmailApp
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             Console.WriteLine("Please enter your Username(5-20 characters)");
-            string username = Console.ReadLine(); 
+            string username = Console.ReadLine();
             return username;
         }
         public string RegisterMenuEnterPassword()
@@ -74,7 +75,7 @@ namespace MiniEmailApp
             Console.Clear();
             Aux.AuxiliaryFunction.PrintProgrammHeader();
             Console.WriteLine("Please enter your Password");
-            string password = Console.ReadLine(); 
+            string password = Console.ReadLine();
             return password;
         }
 
@@ -86,7 +87,7 @@ namespace MiniEmailApp
         #endregion REGISTER
 
 
-        #region LOGIN
+        #region LOGGEDIN_CHOICES_BY_USER_TYPE
         public string LoginMenuUsername()
         {
             Console.Clear();
@@ -110,6 +111,7 @@ namespace MiniEmailApp
             Console.WriteLine($"{user.Usertype.ToString()}  {user.Firstname} {user.Lastname}  has logged in  successfully");
             System.Threading.Thread.Sleep(2000);
         }
+        
         public UserLoginMenuOption User_LoggedInMenu()
         {
             Aux.AuxiliaryFunction.PrintProgrammHeader();
@@ -117,7 +119,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info","5.Log out" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Log out" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -129,8 +131,8 @@ namespace MiniEmailApp
                         return UserLoginMenuOption.EnterChatroom;
                     case 3:
                         return UserLoginMenuOption.ChangePersonalInfo;
-                    case 4 :
-                        Console.Beep();                        
+                    case 4:
+                        Console.Beep();
                         return UserLoginMenuOption.Logout;
                 }
             } while (true);
@@ -142,7 +144,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox","6.Delete User's Mailbox,","7.ResetUserPassword" ,"8.Logout"};
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "8.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -174,7 +176,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword","9.Delete User", "10.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "9.Delete User", "10.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -207,7 +209,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "8.Delete User","9.Delelete All Database ","10.Grant Super Admin Privileges" ,"11.Deposit one million dollars to account","12.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "8.Delete User", "9.Delelete All Database ", "10.Grant Super Admin Privileges", "11.Deposit one million dollars to account", "12.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -234,13 +236,74 @@ namespace MiniEmailApp
                     case 10:
                         return GodLoginMenuOption.DepositmillinDollars;
                     case 11:
-                        Console.Beep();                        
+                        Console.Beep();
                         return GodLoginMenuOption.Logout;
                 }
             } while (true);
         }
-        //public void 
+
+
 
         #endregion
+
+        public void PickAReceiver(out string receiver_username)
+        {
+            Console.Clear();
+            Aux.AuxiliaryFunction.PrintProgrammHeader();
+            Console.WriteLine("Pick the user you want to sent a message to ");
+            List<string> username_list = new List<string>();
+            string[] username_array;
+
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "SELECT Username FROM Users  ORDER BY UserName";
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string username_ = reader["UserName"].ToString();
+                                username_list.Add(username_);
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ErrorInCommunication)
+                {
+                    Console.WriteLine(ErrorInCommunication.Message);
+
+                }
+                connection.Close();
+            }
+            int choice = Aux.AuxiliaryFunction.Return_Choice(username_array = username_list.ToArray());
+            receiver_username = username_array[choice];
+
+
+        }
+
+        public void SentMessage(string receiver_username,out string message)
+        {
+            Console.Clear();
+            Aux.AuxiliaryFunction.PrintProgrammHeader();
+            Console.WriteLine($"You Selected user {receiver_username} to sent a message to");
+            System.Threading.Thread.Sleep(500);
+            Console.WriteLine("Now write your message ");
+            message = Console.ReadLine();
+            if (message.Length > 250)
+            {
+                Console.WriteLine("Message over 250 chars please write a smaller message");
+                message = Console.ReadLine();
+            }
+
+
+        }
     }
 }

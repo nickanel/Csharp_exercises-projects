@@ -10,6 +10,7 @@ namespace MiniEmailApp
     {
         static void Main(string[] args)
         {
+            MessageManager message_manager = new MessageManager();
             MenuManager menu_manager = new MenuManager();
             UserManager user_manager = UserManager.Instance;
             DatabaseManager database_manager = DatabaseManager.Instance;
@@ -49,26 +50,49 @@ namespace MiniEmailApp
                             {
                                 case UserType.User:
                                     {
-
-                                        UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
+                                        //bool is_malakas = false;
                                         do
                                         {
+                                            //is_malakas = false;
+                                            UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
                                             switch (userLoginMenuOption)
                                             {
                                                 case UserLoginMenuOption.ReadMessageBox:
+                                                    List<string> messages = new List<string>();
+                                                    messages = message_manager.ViewMessages(loggedin_user);
+                                                    foreach(string element in messages)
+                                                    {
+                                                        Console.WriteLine($"{element}");
+
+                                                    }
+                                                    Console.WriteLine("Press a key to go to back");
+
                                                     break;
                                                 case UserLoginMenuOption.SentMessage:
+                                                    bool sent;
+                                                    do
+                                                    {
+                                                        menu_manager.PickAReceiver(out string receiver_username);
+                                                        menu_manager.SentMessage(receiver_username, out string message);
+                                                        sent = message_manager.SentMessage(loggedin_user, message, receiver_username);
+                                                        Console.WriteLine($"Sent is {sent}");
+                                                        Console.ReadKey();
+
+                                                    } while (!sent);
                                                     break;
                                                 case UserLoginMenuOption.EnterChatroom:
                                                     break;
                                                 case UserLoginMenuOption.ChangePersonalInfo:
                                                     break;
-                                                case UserLoginMenuOption.Logout:
+                                                case UserLoginMenuOption.Logout:                                                    
+                                                    successfull_login = false;
                                                     break;
                                             }
-                                        } while (userLoginMenuOption != UserLoginMenuOption.Logout);
+                                            
+                                        } while ( successfull_login);            
+                                        
                                     }
-                                    user_manager.Logout();
+                                    
                                     break;
 
                                 case UserType.Admin:
@@ -212,8 +236,9 @@ namespace MiniEmailApp
                         case MainMenuOption.ForgotPassword:
                             break;
                         case MainMenuOption.Exit:
-                            Console.WriteLine(@"");
-                            System.Threading.Thread.Sleep(3000);
+                            Console.Clear();
+                            Console.WriteLine("BYE BYE");
+                            System.Threading.Thread.Sleep(2000);
                             Environment.Exit(0);
                             break;
                     }

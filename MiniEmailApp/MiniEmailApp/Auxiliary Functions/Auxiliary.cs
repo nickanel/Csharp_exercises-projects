@@ -57,7 +57,7 @@ namespace MiniEmailApp.Aux
                     // Just write the current option out if the current item is not our variable c.
                     else
                     {
-                        Console.WriteLine(menuItems[c]);
+                        Console.WriteLine($"   {menuItems[c]}");
                     }
                 }
 
