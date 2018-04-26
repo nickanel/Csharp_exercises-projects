@@ -9,8 +9,7 @@ namespace MiniEmailApp
     public enum MainMenuOption
     {
         Login=1,
-        Register,
-        ForgotPassword,
+        Register,        
         Exit
     }
 }

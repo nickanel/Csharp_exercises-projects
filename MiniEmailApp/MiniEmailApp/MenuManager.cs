@@ -16,17 +16,15 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("**Main Menu**");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
+                string[] menuItems = { "1.Log in ", "2.Register", "3.Exit" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
                     case 0:
                         return MainMenuOption.Login;
                     case 1:
-                        return MainMenuOption.Register;
+                        return MainMenuOption.Register;                   
                     case 2:
-                        return MainMenuOption.ForgotPassword;
-                    case 3:
                         Console.Beep();
                         return MainMenuOption.Exit;
                     default:
@@ -144,7 +142,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "8.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,",  "7.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -159,10 +157,8 @@ namespace MiniEmailApp
                     case 4:
                         return AdminLoginMenuOption.SelectUsertoViewhisChatHistory;
                     case 5:
-                        return AdminLoginMenuOption.DeleteUserMailbox;
+                        return AdminLoginMenuOption.DeleteaUsersMessage;                    
                     case 6:
-                        return AdminLoginMenuOption.ResetUserPassword;
-                    case 7:
                         Console.Beep();
                         return AdminLoginMenuOption.Logout; ;
                 }
@@ -176,7 +172,8 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "9.Delete User", "10.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,", "7.Delete User", "8.Logout" };
+                
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -191,12 +188,11 @@ namespace MiniEmailApp
                     case 4:
                         return SuperAdmiLoginMenuOption.SelectUsertoViewhisChatHistory;
                     case 5:
-                        return SuperAdmiLoginMenuOption.DeleteUserMailbox;
+                        return SuperAdmiLoginMenuOption.DeleteaUsersMessage;
+                    
                     case 6:
-                        return SuperAdmiLoginMenuOption.ResetUserPassword;
-                    case 7:
                         return SuperAdmiLoginMenuOption.DeleteUser;
-                    case 8:
+                    case 7:
                         Console.Beep();
                         return SuperAdmiLoginMenuOption.Logout;
                 }
@@ -209,7 +205,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mailbox,", "7.ResetUserPassword", "8.Delete User", "9.Delelete All Database ", "10.Grant Super Admin Privileges", "11.Deposit one million dollars to account", "12.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,",  "7.Delete User", "8.Delelete All Database ", "9.Grant Super Admin Privileges", "10.Deposit one million dollars to account", "11.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {
@@ -224,18 +220,16 @@ namespace MiniEmailApp
                     case 4:
                         return GodLoginMenuOption.SelectUsertoViewhisChatHistory;
                     case 5:
-                        return GodLoginMenuOption.DeleteUserMailbox;
+                        return GodLoginMenuOption.DeleteaUsersMessage;                    
                     case 6:
-                        return GodLoginMenuOption.ResetUserPassword;
-                    case 7:
                         return GodLoginMenuOption.DeleteUser;
-                    case 8:
+                    case 7:
                         return GodLoginMenuOption.DeleteAllDatabase;
-                    case 9:
+                    case 8:
                         return GodLoginMenuOption.GrantSuperAdminPriveleges;
-                    case 10:
+                    case 9:
                         return GodLoginMenuOption.DepositmillinDollars;
-                    case 11:
+                    case 10:
                         Console.Beep();
                         return GodLoginMenuOption.Logout;
                 }
@@ -262,7 +256,6 @@ namespace MiniEmailApp
                 try
                 {
                     connection.Open();
-
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -279,14 +272,11 @@ namespace MiniEmailApp
                 catch (Exception ErrorInCommunication)
                 {
                     Console.WriteLine(ErrorInCommunication.Message);
-
                 }
                 connection.Close();
             }
             int choice = Aux.AuxiliaryFunction.Return_Choice(username_array = username_list.ToArray());
             receiver_username = username_array[choice];
-
-
         }
 
         public void SentMessage(string receiver_username,out string message)

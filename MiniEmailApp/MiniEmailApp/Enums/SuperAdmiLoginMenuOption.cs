@@ -13,8 +13,7 @@ namespace MiniEmailApp
         EnterChatroom,
         ChangePersonalInfo,
         SelectUsertoViewhisChatHistory,
-        DeleteUserMailbox,
-        ResetUserPassword,
+        DeleteaUsersMessage,
         DeleteUser,
         Logout
     }

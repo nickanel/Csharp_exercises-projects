@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MiniEmailApp
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             MessageManager message_manager = new MessageManager();
             MenuManager menu_manager = new MenuManager();
@@ -30,7 +30,7 @@ namespace MiniEmailApp
                             {
                                 bool correct_username, correct_password;
                                 do
-                                {
+                                {                                    
                                     loggedin_user.Username = menu_manager.LoginMenuUsername();
                                     correct_username = user_manager.UsernameExistsinDatabase(loggedin_user.Username);
 
@@ -50,11 +50,10 @@ namespace MiniEmailApp
                             {
                                 case UserType.User:
                                     {
-                                        //bool is_malakas = false;
+                                        UserLoginMenuOption userLoginMenuOption;
                                         do
-                                        {
-                                            //is_malakas = false;
-                                            UserLoginMenuOption userLoginMenuOption = menu_manager.User_LoggedInMenu();
+                                        {                                            
+                                            userLoginMenuOption = menu_manager.User_LoggedInMenu();
                                             switch (userLoginMenuOption)
                                             {
                                                 case UserLoginMenuOption.ReadMessageBox:
@@ -63,7 +62,6 @@ namespace MiniEmailApp
                                                     foreach(string element in messages)
                                                     {
                                                         Console.WriteLine($"{element}");
-
                                                     }
                                                     Console.WriteLine("Press a key to go to back");
 
@@ -77,29 +75,31 @@ namespace MiniEmailApp
                                                         sent = message_manager.SentMessage(loggedin_user, message, receiver_username);
                                                         Console.WriteLine($"Sent is {sent}");
                                                         Console.ReadKey();
-
                                                     } while (!sent);
                                                     break;
                                                 case UserLoginMenuOption.EnterChatroom:
+                                                    message_manager.Chatroom(loggedin_user);
                                                     break;
                                                 case UserLoginMenuOption.ChangePersonalInfo:
+                                                    user_manager.Change_Personal_Info(loggedin_user);
                                                     break;
-                                                case UserLoginMenuOption.Logout:                                                    
+                                                case UserLoginMenuOption.Logout:
+                                                    Console.Beep();
                                                     successfull_login = false;
                                                     break;
                                             }
                                             
-                                        } while ( successfull_login);            
+                                        } while ( successfull_login);           
                                         
-                                    }
-                                    
+                                    }                                    
                                     break;
 
                                 case UserType.Admin:
                                     {
-                                        AdminLoginMenuOption adminLoginMenuOption = menu_manager.Admin_LoggedInMenu();
+                                        AdminLoginMenuOption adminLoginMenuOption;
                                         do
                                         {
+                                            adminLoginMenuOption = menu_manager.Admin_LoggedInMenu();
                                             switch (adminLoginMenuOption)
                                             {
                                                 case AdminLoginMenuOption.ReadMessageBox:
@@ -107,28 +107,31 @@ namespace MiniEmailApp
                                                 case AdminLoginMenuOption.SentMessage:
                                                     break;
                                                 case AdminLoginMenuOption.EnterChatroom:
+                                                    message_manager.Chatroom(loggedin_user);
                                                     break;
                                                 case AdminLoginMenuOption.ChangePersonalInfo:
+                                                    user_manager.Change_Personal_Info(loggedin_user);
                                                     break;
                                                 case AdminLoginMenuOption.SelectUsertoViewhisChatHistory:
                                                     break;
-                                                case AdminLoginMenuOption.DeleteUserMailbox:
-                                                    break;
-                                                case AdminLoginMenuOption.ResetUserPassword:
+                                                case AdminLoginMenuOption.DeleteaUsersMessage:
                                                     break;
                                                 case AdminLoginMenuOption.Logout:
+                                                    Console.Beep();
+                                                    successfull_login = false;
                                                     break;
                                             }
 
-                                        } while (adminLoginMenuOption != AdminLoginMenuOption.Logout);
+                                        } while (successfull_login);
                                     }
                                     user_manager.Logout();
                                     break;
                                 case UserType.SuperAdmin:
                                     {
-                                        SuperAdmiLoginMenuOption superAdmiLoginMenuOption = menu_manager.SuperAdmin_LoggedInMenu();
+                                        SuperAdmiLoginMenuOption superAdmiLoginMenuOption;
                                         do
                                         {
+                                            superAdmiLoginMenuOption = menu_manager.SuperAdmin_LoggedInMenu();
                                             switch (superAdmiLoginMenuOption)
                                             {
                                                 case SuperAdmiLoginMenuOption.ReadMessageBox:
@@ -136,28 +139,33 @@ namespace MiniEmailApp
                                                 case SuperAdmiLoginMenuOption.SentMessage:
                                                     break;
                                                 case SuperAdmiLoginMenuOption.EnterChatroom:
+                                                    message_manager.Chatroom(loggedin_user);
                                                     break;
                                                 case SuperAdmiLoginMenuOption.ChangePersonalInfo:
+                                                    user_manager.Change_Personal_Info(loggedin_user);
                                                     break;
                                                 case SuperAdmiLoginMenuOption.SelectUsertoViewhisChatHistory:
                                                     break;
-                                                case SuperAdmiLoginMenuOption.DeleteUserMailbox:
-                                                    break;
-                                                case SuperAdmiLoginMenuOption.ResetUserPassword:
-                                                    break;
+                                                case SuperAdmiLoginMenuOption.DeleteaUsersMessage:
+                                                    break;                                                
                                                 case SuperAdmiLoginMenuOption.DeleteUser:
+                                                    user_manager.Delete_User();
                                                     break;
                                                 case SuperAdmiLoginMenuOption.Logout:
+                                                    Console.Beep();
+                                                    successfull_login = false;
                                                     break;
                                             }
-                                        } while (superAdmiLoginMenuOption != SuperAdmiLoginMenuOption.Logout);
+                                        } while (successfull_login);
                                     }
                                     user_manager.Logout();
                                     break;
                                 case UserType.God:
-                                    GodLoginMenuOption godLoginMenuOption = menu_manager.God_LoggedInMenu();
+
+                                    GodLoginMenuOption godLoginMenuOption ;
                                     do
                                     {
+                                        godLoginMenuOption = menu_manager.God_LoggedInMenu();
                                         switch (godLoginMenuOption)
                                         {
                                             case GodLoginMenuOption.ReadMessageBox:
@@ -165,16 +173,17 @@ namespace MiniEmailApp
                                             case GodLoginMenuOption.SentMessage:
                                                 break;
                                             case GodLoginMenuOption.EnterChatroom:
+                                                message_manager.Chatroom(loggedin_user);
                                                 break;
                                             case GodLoginMenuOption.ChangePersonalInfo:
+                                                user_manager.Change_Personal_Info(loggedin_user);
                                                 break;
                                             case GodLoginMenuOption.SelectUsertoViewhisChatHistory:
                                                 break;
-                                            case GodLoginMenuOption.DeleteUserMailbox:
-                                                break;
-                                            case GodLoginMenuOption.ResetUserPassword:
-                                                break;
+                                            case GodLoginMenuOption.DeleteaUsersMessage:
+                                                break;                                            
                                             case GodLoginMenuOption.DeleteUser:
+                                                user_manager.Delete_User();
                                                 break;
                                             case GodLoginMenuOption.DeleteAllDatabase:
                                                 break;
@@ -183,9 +192,11 @@ namespace MiniEmailApp
                                             case GodLoginMenuOption.DepositmillinDollars:
                                                 break;
                                             case GodLoginMenuOption.Logout:
+                                                Console.Beep();
+                                                successfull_login = false;
                                                 break;
                                         }
-                                    } while (godLoginMenuOption != GodLoginMenuOption.Logout);
+                                    } while (successfull_login);
                                     user_manager.Logout();
                                     break;
                             }
@@ -232,9 +243,7 @@ namespace MiniEmailApp
                             menu_manager.SuccessfullRegister(tempuser.Username);
                             
 
-                            break;
-                        case MainMenuOption.ForgotPassword:
-                            break;
+                            break;                        
                         case MainMenuOption.Exit:
                             Console.Clear();
                             Console.WriteLine("BYE BYE");
@@ -248,7 +257,7 @@ namespace MiniEmailApp
 
                 catch (SystemException e)
                 {
-
+                    Console.WriteLine(e );
                 }
 
             } while (true);

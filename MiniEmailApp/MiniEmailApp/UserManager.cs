@@ -34,6 +34,214 @@ namespace MiniEmailApp
 
 
 
+        public void Change_Personal_Info(User user)
+        {
+            string[] choices = { "1.Change First Name", "2.Change Lastname","3.Go Back" };
+            
+            bool correct_firstname=false, correct_lastname=false,exit=false;
+            do
+            {
+                int choice = Aux.AuxiliaryFunction.Return_Choice(choices);
+                string firstname, lastname;
+                switch (choice)
+                {
+                    case 0:
+                        do
+                        {
+                            Console.WriteLine("Change a new FirstName");
+                            firstname = Console.ReadLine();
+                            correct_firstname = Instance.ValidateRegisteringFirstname(firstname);
+                        } while (!correct_firstname);
+                        Update_First_Name(user, firstname,out int rows);
+                        Console.WriteLine($"{rows} Firstname was succesfully updated");
+                        System.Threading.Thread.Sleep(200);
+                        break;
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("Change a new Lastname");
+                            lastname = Console.ReadLine();
+                            correct_lastname = Instance.ValidateRegisteringFirstname(lastname);
+                        } while (!correct_lastname);
+                        Update_Last_Name(user, lastname, out int rows_);
+                        Console.WriteLine($"{rows_} Firstname was succesfully updated");
+                        System.Threading.Thread.Sleep(200);
+;                        break;
+                    case 2:
+                        exit = true;
+                        break;
+                }
+            } while (!exit);
+        }
+        public void Update_First_Name(User user,string new_name,out int rows)
+        {
+
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "UPDATE Users SET FirstName=@new_name" +
+                    " WHERE UserID=@user_id";
+            rows = 0;
+
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter("new_name", new_name));
+                        command.Parameters.Add(new SqlParameter("user_id", user.Userid));
+                        rows = command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ErrorInCommunication)
+                {
+                    Console.WriteLine(ErrorInCommunication.Message);
+
+                }
+                connection.Close();
+            }
+
+        }
+        public void Update_Last_Name(User user, string new_name, out int rows)
+        {
+
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "UPDATE Users SET LastName=@new_name" +
+                    " WHERE UserID=@user_id";
+            rows = 0;
+
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter("new_name", new_name));
+                        command.Parameters.Add(new SqlParameter("user_id", user.Userid));
+                        rows = command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ErrorInCommunication)
+                {
+                    Console.WriteLine(ErrorInCommunication.Message);
+
+                }
+                connection.Close();
+            }
+
+        }
+
+        public void Delete_User()
+        {
+            Console.WriteLine("Select a user to delete :");
+            ViewAllUsers(out List<string> users_usernames,out int count);
+            Console.WriteLine($"{count} users will be  shown");
+            Console.ReadKey();
+            string[] users_usernames_array = users_usernames.ToArray();
+            int choice = Aux.AuxiliaryFunction.Return_Choice(users_usernames_array);
+            Console.WriteLine($"Are you sure you want to delete user{users_usernames_array[choice]}");
+            Console.ReadKey();
+            string[] yes_or_no = { "Yes", "No" };
+            int choice2 = Aux.AuxiliaryFunction.Return_Choice(yes_or_no);
+            string username = users_usernames_array[choice];
+            switch (choice2)
+            {
+                case 0:
+                    DeleteUserFromDatabase(username, out int rows);
+                    Console.WriteLine($"User {users_usernames_array[choice]} wass successfully deleted");
+                    Console.WriteLine($"{rows} row(s) affected in Database");
+                    Console.WriteLine("You will be redirected to options menu after 2 seconds");
+                    System.Threading.Thread.Sleep(2000);
+
+
+                    break;
+                case 1:
+                    Console.WriteLine($"User {users_usernames_array[choice]} will bot be deleted");
+                    Console.WriteLine("You will be redirected to options menu after 2 seconds");
+                    System.Threading.Thread.Sleep(2000);
+                    break;
+            }
+
+
+
+        }
+        public void DeleteUserFromDatabase(string username,out int rows)
+        {
+            rows = 0;
+            try
+            {
+                string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+                using (SqlConnection conn =
+                    new SqlConnection(databaseConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd =
+                        new SqlCommand("DELETE FROM Users " +
+                            "WHERE UserName=@username_", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username_", username);
+
+                         rows = cmd.ExecuteNonQuery();
+
+                        //rows number of record got deleted
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+        }
+
+        public void ViewAllUsers(out List<string> users_usernames,out int count)
+        {
+            List<string> users_usernames1234= new List<string>();
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "SELECT * FROM Users " ;
+             count = 0;
+            
+                
+
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {                                
+                                    
+                                string username_ = reader["UserName"].ToString();
+                                users_usernames1234.Add(username_);
+                                count++;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ErrorInCommunication)
+                {
+                    Console.WriteLine(ErrorInCommunication.Message);
+
+                }
+                users_usernames = users_usernames1234;
+                connection.Close();
+            }
+
+        }
+
         #region REGISTER VALIDATIONS
         public bool ValidateRegisteringFirstname(string firstname)
         {
@@ -41,6 +249,7 @@ namespace MiniEmailApp
 
             return firstnameisvadid;
         }
+        
         public bool ValidateRegisteringLastname(string lastname)
         {
             bool lastnameisvalid = Aux.AuxiliaryFunction.ValidateName(lastname);
