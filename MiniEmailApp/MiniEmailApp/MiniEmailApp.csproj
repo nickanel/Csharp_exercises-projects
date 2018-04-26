@@ -43,13 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary Functions\Auxiliary.cs" />
-    <Compile Include="ChatroomManager.cs" />
     <Compile Include="DatabaseManager.cs" />
     <Compile Include="Enums\AdminLoginMenuOption.cs" />
     <Compile Include="Enums\GodLoginMenuOption.cs" />
     <Compile Include="Enums\SuperAdmiLoginMenuOption.cs" />
     <Compile Include="Enums\UserLoginMenuOption.cs" />
-    <Compile Include="MainMenuOption.cs" />
+    <Compile Include="Enums\MainMenuOption.cs" />
     <Compile Include="MessageManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="MenuManager.cs" />

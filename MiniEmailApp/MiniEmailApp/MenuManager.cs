@@ -172,7 +172,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,", "7.Delete User", "8.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Add Privileges", "6.Delete User's Mail,", "7.Delete User", "8.Logout" };
                 
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
@@ -186,7 +186,7 @@ namespace MiniEmailApp
                     case 3:
                         return SuperAdmiLoginMenuOption.ChangePersonalInfo;
                     case 4:
-                        return SuperAdmiLoginMenuOption.SelectUsertoViewhisChatHistory;
+                        return SuperAdmiLoginMenuOption.AddPrivileges;
                     case 5:
                         return SuperAdmiLoginMenuOption.DeleteaUsersMessage;
                     
@@ -205,7 +205,7 @@ namespace MiniEmailApp
             {
                 Console.WriteLine("****");
                 // menuItems = { "1.Log in ", "2.Register", "3.Forgot my Password", "4.Exit" };
-                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,",  "7.Delete User", "8.Delelete All Database ", "9.Grant Super Admin Privileges", "10.Deposit one million dollars to account", "11.Logout" };
+                string[] menuItems = { "1.Read Message Box ", "2.Sent new Message", "3.Enter Chatroom", "4.Change Personal Info", "5.Select User to view his Mailbox", "6.Delete User's Mail,",  "7.Delete User", "8.Delete All Database ", "9.Grant Super Admin Privileges", "10.Deposit one million dollars to account", "11.Logout" };
                 int option = Aux.AuxiliaryFunction.Return_Choice(menuItems);
                 switch (option)
                 {

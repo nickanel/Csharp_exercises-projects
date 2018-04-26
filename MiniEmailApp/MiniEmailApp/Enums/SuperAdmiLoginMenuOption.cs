@@ -12,7 +12,7 @@ namespace MiniEmailApp
         SentMessage,
         EnterChatroom,
         ChangePersonalInfo,
-        SelectUsertoViewhisChatHistory,
+        AddPrivileges,
         DeleteaUsersMessage,
         DeleteUser,
         Logout

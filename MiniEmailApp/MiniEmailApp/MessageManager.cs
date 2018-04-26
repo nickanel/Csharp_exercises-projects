@@ -46,7 +46,7 @@ namespace MiniEmailApp
         }
         public List<string> ViewMessages(User loggedin_user)
         {
-
+            Console.Clear();
             List<string> Messages = new List<string>();
             string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
@@ -197,8 +197,162 @@ namespace MiniEmailApp
 
         public void DeleteAUsersMail()
         {
+            Console.Clear();
+            Pick_A_User(out string choosen_username, out int choosen_user_curent_authority);
+            System.Threading.Thread.Sleep(2000);
+            Console.Clear();
+            Console.WriteLine("You will know view the users mailbox and will have to pick mail to delete");
+            System.Threading.Thread.Sleep(2000);
+            List<Message> users_messages=ViewaUsersMailbox( choosen_username);
+            List<int> messageidlist = new List<int>(200);
+            List<string> sender = new List<string>(200);
+            List<string> messagedata = new List<string>(200);
+            List<string>complete_message= new List<string>(200);
+            foreach (Message element in users_messages)
+            {
+                messageidlist.Add(element.MessageID);
+                sender.Add(element.Sender_Username);
+                messagedata.Add(element.Message_Data);
+                string message = $"{element.MessageID}||{element.Sender_Username} wrote : {element.Message_Data} ";
+                complete_message.Add(message);
+            }
+            int choice = Aux.AuxiliaryFunction.Return_Choice(complete_message.ToArray());
+            Console.Clear();
+            Console.WriteLine($"You decided to delete message {complete_message[choice]}");
+            System.Threading.Thread.Sleep(3000);
+            DeletemailbyID(messageidlist[choice]);
 
         }
+        public void DeletemailbyID(int message_id)
+        {
+            try
+            {
+                string connectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+                using (SqlConnection conn =
+                    new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd =new SqlCommand("DELETE FROM Messages " +
+                            "WHERE MessageID=@message_id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@message_id", message_id);
+
+                        int rows = cmd.ExecuteNonQuery();
+
+                        //rows number of record got deleted
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine("The message was deleted successfully");
+            Console.ReadKey();
+        }
+    
+        public void Pick_A_User(out string choosen_username, out int choosen_user_curent_authority)
+        {
+
+            Console.Clear();
+            Aux.AuxiliaryFunction.PrintProgrammHeader();
+            Console.WriteLine("Pick the user you want to view his message box ");
+            List<string> username_list = new List<string>();
+            List<int> authority_list = new List<int>(100);
+            string[] username_array;
+
+
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "SELECT Username,UserType FROM Users  ORDER BY UserName";
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string username_ = reader["UserName"].ToString();
+                                username_list.Add(username_);
+                                int authority = (int)reader["UserType"];
+                                authority_list.Add(authority);
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                connection.Close();
+            }
+            int choice = Aux.AuxiliaryFunction.Return_Choice(username_array = username_list.ToArray());
+            choosen_username = username_array[choice];
+            choosen_user_curent_authority = authority_list[choice];
+
+        }
+        public List<Message> ViewaUsersMailbox(string selected_username)
+        {
+            Console.Clear();
+            List<string> Messages = new List<string>();
+            List<Message> Messages_List = new List<Message>();
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string query = "SELECT * FROM Messages WHERE Receiver_Username=@receiver  ORDER BY DateCreated";
+
+            using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.Add(new SqlParameter("receiver", selected_username));
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                bool isread=(bool)reader["ReadStatus"]; 
+                                int message_id = (int)reader["MessageID"];
+                                string message_data = reader["Message_Data"].ToString();
+                                string senderusername = reader["Sender_Username"].ToString();
+                                string receiversusername = reader["Receiver_Username"].ToString();
+                                DateTime datecreated = (DateTime)reader["DateCreated"];
+                                string Message = $"User {senderusername} sent {message_data} on {datecreated.ToShortDateString()}";
+                                Console.WriteLine($"{Message}");
+                                Messages.Add(Message);
+                                Messages_List.Add(new Message(message_id, senderusername, receiversusername, message_data, isread, datecreated));
+
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ErrorInCommunication)
+                {
+                    Console.WriteLine(ErrorInCommunication.Message);
+
+                }
+                connection.Close();
+
+            }
+            Console.ReadKey();
+            return Messages_List;
+        }
+
+        public void AdminWantstoSeeYourMailBox()
+        {
+            Pick_A_User(out string choosen_username, out int choosen_user_curent_authority);
+             ViewaUsersMailbox(choosen_username);
+            Console.ReadKey();
+        }
     }    
 }

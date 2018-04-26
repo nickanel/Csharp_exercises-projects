@@ -103,8 +103,25 @@ namespace MiniEmailApp
                                             switch (adminLoginMenuOption)
                                             {
                                                 case AdminLoginMenuOption.ReadMessageBox:
+                                                    List<string> messages = new List<string>();
+                                                    messages = message_manager.ViewMessages(loggedin_user);
+                                                    foreach (string element in messages)
+                                                    {
+                                                        Console.WriteLine($"{element}");
+                                                    }
+                                                    Console.WriteLine("Press a key to go to back");
+
                                                     break;
                                                 case AdminLoginMenuOption.SentMessage:
+                                                    bool sent;
+                                                    do
+                                                    {
+                                                        menu_manager.PickAReceiver(out string receiver_username);
+                                                        menu_manager.SentMessage(receiver_username, out string message);
+                                                        sent = message_manager.SentMessage(loggedin_user, message, receiver_username);
+                                                        Console.WriteLine($"Sent is {sent}");
+                                                        Console.ReadKey();
+                                                    } while (!sent);
                                                     break;
                                                 case AdminLoginMenuOption.EnterChatroom:
                                                     message_manager.Chatroom(loggedin_user);
@@ -113,8 +130,10 @@ namespace MiniEmailApp
                                                     user_manager.Change_Personal_Info(loggedin_user);
                                                     break;
                                                 case AdminLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                    message_manager.AdminWantstoSeeYourMailBox();
                                                     break;
                                                 case AdminLoginMenuOption.DeleteaUsersMessage:
+                                                    message_manager.DeleteAUsersMail();
                                                     break;
                                                 case AdminLoginMenuOption.Logout:
                                                     Console.Beep();
@@ -135,8 +154,25 @@ namespace MiniEmailApp
                                             switch (superAdmiLoginMenuOption)
                                             {
                                                 case SuperAdmiLoginMenuOption.ReadMessageBox:
+                                                    List<string> messages = new List<string>();
+                                                    messages = message_manager.ViewMessages(loggedin_user);
+                                                    foreach (string element in messages)
+                                                    {
+                                                        Console.WriteLine($"{element}");
+                                                    }
+                                                    Console.WriteLine("Press a key to go to back");
+
                                                     break;
                                                 case SuperAdmiLoginMenuOption.SentMessage:
+                                                    bool sent;
+                                                    do
+                                                    {
+                                                        menu_manager.PickAReceiver(out string receiver_username);
+                                                        menu_manager.SentMessage(receiver_username, out string message);
+                                                        sent = message_manager.SentMessage(loggedin_user, message, receiver_username);
+                                                        Console.WriteLine($"Sent is {sent}");
+                                                        Console.ReadKey();
+                                                    } while (!sent);
                                                     break;
                                                 case SuperAdmiLoginMenuOption.EnterChatroom:
                                                     message_manager.Chatroom(loggedin_user);
@@ -144,9 +180,11 @@ namespace MiniEmailApp
                                                 case SuperAdmiLoginMenuOption.ChangePersonalInfo:
                                                     user_manager.Change_Personal_Info(loggedin_user);
                                                     break;
-                                                case SuperAdmiLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                case SuperAdmiLoginMenuOption.AddPrivileges:
+                                                    user_manager.Add_Privileges();
                                                     break;
                                                 case SuperAdmiLoginMenuOption.DeleteaUsersMessage:
+                                                    message_manager.DeleteAUsersMail();
                                                     break;                                                
                                                 case SuperAdmiLoginMenuOption.DeleteUser:
                                                     user_manager.Delete_User();
@@ -169,8 +207,25 @@ namespace MiniEmailApp
                                         switch (godLoginMenuOption)
                                         {
                                             case GodLoginMenuOption.ReadMessageBox:
+                                                List<string> messages = new List<string>();
+                                                messages = message_manager.ViewMessages(loggedin_user);
+                                                foreach (string element in messages)
+                                                {
+                                                    Console.WriteLine($"{element}");
+                                                }
+                                                Console.WriteLine("Press a key to go to back");
+
                                                 break;
                                             case GodLoginMenuOption.SentMessage:
+                                                bool sent;
+                                                do
+                                                {
+                                                    menu_manager.PickAReceiver(out string receiver_username);
+                                                    menu_manager.SentMessage(receiver_username, out string message);
+                                                    sent = message_manager.SentMessage(loggedin_user, message, receiver_username);
+                                                    Console.WriteLine($"Sent is {sent}");
+                                                    Console.ReadKey();
+                                                } while (!sent);
                                                 break;
                                             case GodLoginMenuOption.EnterChatroom:
                                                 message_manager.Chatroom(loggedin_user);
@@ -179,13 +234,16 @@ namespace MiniEmailApp
                                                 user_manager.Change_Personal_Info(loggedin_user);
                                                 break;
                                             case GodLoginMenuOption.SelectUsertoViewhisChatHistory:
+                                                message_manager.AdminWantstoSeeYourMailBox();
                                                 break;
                                             case GodLoginMenuOption.DeleteaUsersMessage:
+                                                message_manager.DeleteAUsersMail();
                                                 break;                                            
                                             case GodLoginMenuOption.DeleteUser:
                                                 user_manager.Delete_User();
                                                 break;
                                             case GodLoginMenuOption.DeleteAllDatabase:
+                                                database_manager.DeleteAllDatabases();
                                                 break;
                                             case GodLoginMenuOption.GrantSuperAdminPriveleges:
                                                 user_manager.Add_Privileges();
