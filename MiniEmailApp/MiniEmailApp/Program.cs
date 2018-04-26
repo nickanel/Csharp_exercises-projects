@@ -188,8 +188,10 @@ namespace MiniEmailApp
                                             case GodLoginMenuOption.DeleteAllDatabase:
                                                 break;
                                             case GodLoginMenuOption.GrantSuperAdminPriveleges:
+                                                user_manager.Add_Privileges();
                                                 break;
                                             case GodLoginMenuOption.DepositmillinDollars:
+                                                user_manager.DepositOneMillionDollars();
                                                 break;
                                             case GodLoginMenuOption.Logout:
                                                 Console.Beep();

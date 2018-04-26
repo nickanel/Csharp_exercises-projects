@@ -135,7 +135,178 @@ namespace MiniEmailApp
             }
 
         }
+        public void Add_Privileges()
+        {
+            Pick_A_User(out string choosen_username, out int choosen_user_curent_authority);
+            Console.WriteLine($"You have picked user {choosen_username} who is a(n) {(UserType)choosen_user_curent_authority}");
+            Console.ReadKey();
+            UserType chosen_users_type = (UserType)choosen_user_curent_authority;
+            string[] choices = { "User", "Admin", "SuperAdmin", "God" };
+            bool success=false;
 
+            do
+            {
+                Console.WriteLine($"Pick  whether you want to upgrade/downgrade the user {choosen_username}");
+                Console.WriteLine("Pick the new authority ");
+                System.Threading.Thread.Sleep(2000);
+                int choice = Aux.AuxiliaryFunction.Return_Choice(choices);
+                UserType new_authority = (UserType)choice+1;
+
+                switch (new_authority)
+                {
+                    case UserType.User:
+                        if (chosen_users_type == new_authority)
+                        {
+                            Console.WriteLine("User arleady has the current authority choose and other");
+                            System.Threading.Thread.Sleep(1500);
+                            break;
+                        }
+                        else
+                        {
+                            Change_Authority(choosen_username, UserType.User);
+                            success = true;
+                        }
+                        break;
+                    case UserType.Admin:
+                        if (chosen_users_type == new_authority)
+                        {
+                            Console.WriteLine("User arleady has the current authority choose and other");
+                            System.Threading.Thread.Sleep(1500);
+                            break;
+                        }
+                        else
+                        {
+                            Change_Authority(choosen_username, UserType.Admin);
+                            success = true;
+                        }
+                        break;
+                    case UserType.SuperAdmin:
+                        if (chosen_users_type == new_authority)
+                        {
+                            Console.WriteLine("User arleady has the current authority choose and other");
+                            System.Threading.Thread.Sleep(1500);
+                            break;
+                        }
+                        else
+                        {
+                            Change_Authority(choosen_username, UserType.SuperAdmin);
+
+                            success = true;
+                        }
+                        break;
+                    case UserType.God:
+                        if (chosen_users_type == new_authority)
+                        {
+                            Console.WriteLine("User arleady has the current authority choose and other");
+                            System.Threading.Thread.Sleep(1500);
+                            break;
+                        }
+                        else
+                        {
+                            Change_Authority(choosen_username, UserType.God);
+                            success = true;
+                        }
+                        break;
+                }
+            } while (!success);
+        }
+
+        public void Change_Authority(string username,UserType new_authority)
+        {
+
+            int authority = (int)new_authority; ;
+            string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            try { 
+                    using (SqlConnection conn = new SqlConnection(databaseConnectionString))
+                    {
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand("UPDATE Users SET UserType=@usertype_ WHERE UserName=@username_", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@usertype_", authority);
+                            cmd.Parameters.AddWithValue("@username_", username);
+                                    
+
+                            int rows = cmd.ExecuteNonQuery();
+
+                            //rows number of record got updated
+                        }
+                    }
+                }
+             catch (SqlException ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            Console.WriteLine($"User {username} is now a {(UserType)authority}");
+            System.Threading.Thread.Sleep(1700);
+
+
+        }
+        public void Pick_A_User(out string choosen_username,out int choosen_user_curent_authority)
+        {
+            
+                Console.Clear();
+                Aux.AuxiliaryFunction.PrintProgrammHeader();
+                Console.WriteLine("Pick the user you want upgrade/downgrade ");
+                List<string> username_list = new List<string>();
+                List<int> authority_list = new List<int>(100);
+                string[] username_array;
+                
+
+                string databaseConnectionString = @"Data Source=KANELLOV-PC\SQLEXPRESS;Initial Catalog=Project_Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+                string query = "SELECT Username,UserType FROM Users  ORDER BY UserName";
+                using (SqlConnection connection = new SqlConnection(databaseConnectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    string username_ = reader["UserName"].ToString();
+                                    username_list.Add(username_);
+                                    int authority =(int)reader["UserType"];
+                                     authority_list.Add(authority);
+                                }
+
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    connection.Close();
+                }
+                int choice = Aux.AuxiliaryFunction.Return_Choice(username_array = username_list.ToArray());
+                choosen_username = username_array[choice];
+                choosen_user_curent_authority = authority_list[choice];
+                
+        }
+
+        
+        
+        public void DepositOneMillionDollars()
+        {
+            Random rnd = new Random();
+            int account_numer = rnd.Next(249118546, 892319572);
+            Console.WriteLine("You are about to deposit one million dollars to a random Bank Account Across The world ");
+            Console.WriteLine("Are you sure you want to do this good to the world ?");
+            string[] choices = { "yes","no"};
+            System.Threading.Thread.Sleep(1000);
+            int choice = Aux.AuxiliaryFunction.Return_Choice_for_Chat(choices);
+            if (choice == 0)
+            {
+                Console.WriteLine($"1.000.000 $ were deposited to {account_numer} ,Good Job");
+                Console.WriteLine("Press any key to go back ");
+                Console.ReadKey();
+            }
+
+            
+        }
         public void Delete_User()
         {
             Console.WriteLine("Select a user to delete :");
@@ -538,26 +709,27 @@ namespace MiniEmailApp
             currentUser = new User();
         }
 
-        //    do {
-        //    //ektupose epiloges
+            //    do {
+            //    //ektupose epiloges
 
 
-        //    //diabase epilogi
+            //    //diabase epilogi
 
-        //    swtich(choice)
-        //    {
-        //        case1:return kati
+            //    swtich(choice)
+            //    {
+            //        case1:return kati
 
-        //        case 2 : retun kati allo;
+            //        case 2 : retun kati allo;
 
-        //        default break;
-        //        Console.Beep();
-        //        Console.Clear();
-        //    }
-        //    }while (true)
+            //        default break;
+            //        Console.Beep();
+            //        Console.Clear();
+            //    }
+            //    }while (true)
 
-        //    //out public void LoginMenu(out string username ,out string password)
+            //    //out public void LoginMenu(out string username ,out string password)
 
-        ////gia na xrisimopoisw to using se antikeimeno prepei na ilopoisw to idisposable  ka tin dispose 
+            ////gia na xrisimopoisw to using se antikeimeno prepei na ilopoisw to idisposable  ka tin dispose 
+        
     }
 }

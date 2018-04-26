@@ -195,5 +195,10 @@ namespace MiniEmailApp
             Chat_Messages = Messages;
         }
 
+        public void DeleteAUsersMail()
+        {
+
+        }
+
     }    
 }
