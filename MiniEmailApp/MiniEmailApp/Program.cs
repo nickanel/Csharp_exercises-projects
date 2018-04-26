@@ -248,7 +248,8 @@ namespace MiniEmailApp
                                             case GodLoginMenuOption.GrantSuperAdminPriveleges:
                                                 user_manager.Add_Privileges();
                                                 break;
-                                            case GodLoginMenuOption.DepositmillinDollars:
+                                            case GodLoginMenuOption.DepositmillinDoll
+                                            ars:
                                                 user_manager.DepositOneMillionDollars();
                                                 break;
                                             case GodLoginMenuOption.Logout:
